@@ -9,7 +9,7 @@ stages {
     }
    }
    
-stage('build customer app code') { 
+ stage('build customer app code') { 
  steps {
   script {
    echo "Installing Java"
@@ -22,17 +22,17 @@ stage('build customer app code') {
     }
   }
  }
- 
-  stage('docker images code') { 
+   stage('docker images code') { 
  steps {
   script {
-       sh 'docker build -t rakeshraheja89/project .'
-       sh "docker login -u=$env.user -p=$env.password"
-        sh "docker push rakeshraheja89/project"
-         sh  'docker run -p 3000:8090 -d rakeshraheja89/project'
+       sh 'docker build -t msshrinivas38/ninja-app .'
+       sh "docker login --username=$env.username --password=$env.pwd"
+       sh 'docker push msshrinivas38/ninja-app'
+   sh 'sudo docker run -p 3000:8090 -d  msshrinivas38/ninja-app'
         
     }
   }
  }
+ 
 }
 }
