@@ -2,18 +2,15 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 import calendar as cal
-import os
+
+m_df = pd.read_csv("./prepare_data/data/raw/all_sentimet_fx.csv")
+
+m_df['Date1'] = pd.to_datetime(m_df['Date1'])
+
+m_df.sort_values(by=['Date1'],ascending=True)
 
 
-
-m_df = pd.read_csv("C:\\Users\\sivas\\Python Projects\\ninja-dashboard\\prepare_data\\data\\all_sentimet_fx.csv")
-
-m_df['Date'] = pd.to_datetime(m_df['Date'])
-
-m_df.sort_values(by=['Date'],ascending=True)
-
-
-friday_df = pd.DataFrame(m_df[m_df.Date.dt.weekday_name == "Friday"])
+friday_df = pd.DataFrame(m_df[m_df.Date1.dt.weekday_name == "Friday"])
 
 friday_df["No_of_shares"]=10
 
@@ -36,4 +33,4 @@ agg_df['CurrentPrice']=m_df.groupby('Stock').agg({'Close':'last'})
 
 agg_df['Gain'] = round((agg_df['CurrentPrice']*agg_df['No_of_shares']-agg_df['Bought']*agg_df['No_of_shares'])/(agg_df['Bought']*agg_df['No_of_shares'])*100,2)
 
-agg_df.to_csv("C:\\Users\\sivas\\Python Projects\\ninja-dashboard\\prepare_data\\data\\stock_analysis_V1.csv")
+agg_df.to_csv("./prepare_data/data/stock_analysis_V1.csv")
