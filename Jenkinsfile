@@ -34,6 +34,10 @@ stages {
   }
  }
  
+ 
+ 
+ 
+ 
  /*
    stage('docker images code') { 
  steps {
