@@ -8,6 +8,17 @@ stages {
      }
     }
    }
+ 
+ stage('Junit Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit 'target/surefire-reports/*.xml'
+                }
+            }
+        }
    
  stage('build customer app code') { 
  steps {
@@ -22,6 +33,8 @@ stages {
     }
   }
  }
+ 
+ /*
    stage('docker images code') { 
  steps {
   script {
@@ -36,3 +49,4 @@ stages {
  
 }
 }
+*/
